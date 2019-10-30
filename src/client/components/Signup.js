@@ -4,10 +4,10 @@ import { emailRegex, formValidation } from '../../utils/validation';
 
 class Signup extends Component {
 	state = {
-	  firstName: null,
-	  lastName: null,
-	  email: null,
-	  password: null,
+	  firstName: '',
+	  lastName: '',
+	  email: '',
+	  password: '',
 	  formErrors: {
 	    firstName: '',
 	    lastName: '',
@@ -17,32 +17,31 @@ class Signup extends Component {
 	};
 
   handleSubmit = (e) => {
-    const userData = this.state;
     e.preventDefault();
-    axios.post('/api/user/register', {
-      method: 'POST',
-      body: JSON.stringify(userData),
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-    }).then((response) => {
-      response.json().then((data) => {
-        console.log(`Successful${data}`);
+    e.target.reset();
+
+    const userData = this.state;
+
+    axios.post('http://localhost:8080/api/user/register', userData)
+      .then((response) => {
+        console.log('User info sent to database');
+      })
+      .catch((error) => {
+        console.log(error);
       });
-    });
 
     if (formValidation(this.state)) {
+      // these console logs would be removed before pushing to production; dev purposes only
 	    console.log(`
-					--SUBMITTING--
-					First Name: ${this.state.firstName}
-					Last Name: ${this.state.lastName}
-					Email: ${this.state.email}
-					Password: ${this.state.password}
+        --SUBMITTING--
+        First Name: ${this.state.firstName}
+				Last Name: ${this.state.lastName}
+        Email: ${this.state.email}
+        Password: ${this.state.password}
 				`);
 	  } else {
 	    console.error('FORM INVALID - DISPLAY ERROR MESSAGE');
-	  }
+    }
   };
 
 	handleChange = (e) => {

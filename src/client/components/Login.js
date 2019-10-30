@@ -12,26 +12,20 @@ class Login extends Component {
 	  }
 	};
 
-
 	handleSubmit = (e) => {
-	  const userData = this.state.email;
+	  const userData = this.state;
 	  e.preventDefault();
-
-	  axios.get('/api/user/login', {
-	    method: 'GET',
-	    body: JSON.stringify(userData),
-	    headers: {
-	      Accept: 'application/json',
-	      'Content-Type': 'application/json'
-	    },
-	  }).then((response) => {
-	    response.json().then((data) => {
-	      console.log(`Successful${data}`);
+	  e.target.reset();
+	  axios.post('http://localhost:8080/api/user/login', userData)
+	    .then((response) => {
+	      console.log('User logged in');
+	    })
+	    .catch((error) => {
+	      console.log(error);
 	    });
-	  });
-
 
 	  if (formValidation(this.state)) {
+	    // these console logs would be removed before pushing to production; dev purposes only
 	    console.log(`
 					--SUBMITTING--
 					Email: ${this.state.email}

@@ -6,10 +6,6 @@
 > Design: https://puu.sh/y9zLf/7430fad2e6.png
 > Interaction: https://puu.sh/y9zO1/a903cdc127.mp4
 
-## Code Samples
-
-> You've gotten their attention in the introduction, now show a few code examples. So they get a visualization and as a bonus, make them copy/paste friendly.
-
 ## Installation
 
 `npm install`
@@ -35,3 +31,17 @@ to build app for production
 to start the production app
 
 ---
+
+## TODOS
+
+The following are things I would want to improve/refactor or consider:
+
+[] configure dev/prod environments and use/check for it in code where required
+[] refactor for async/await
+[] add authentication/jwt sessions to verify users on login
+[] consider who and how many times our api can be accessed
+[] add server logging (morgan)
+[] sql procedures/scripts for creating/dropping db tables
+[] controlled roles/persmissions for db users
+[] use orm (sequelize)
+[] use styled-components for CSS-in-JS (I prefer the explicit connect btwn css rules and html elements)
